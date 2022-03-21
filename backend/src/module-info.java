@@ -1,2 +1,2 @@
-module backendSudoku {
+module backend {
 }
