@@ -4,15 +4,19 @@ public class Field {
 
 	int y;
 	int x;
-	
 	int value;
-	
 	int [] possibleValues = new int[9];
+	
+	boolean isEditable = false;
 	
 	Field (){
 		
 	}
 
+	@Override
+	public String toString() {
+		return "["+ this.x + " " + this.y + " " + this.value + "]";
+	}
 
 	public int getY() {
 		return y;
