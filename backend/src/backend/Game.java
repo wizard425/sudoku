@@ -25,12 +25,15 @@ public class Game {
 		
 		for( int i = 0; i < 9; i++) {
 			for( int j = 0; j < 9; j++) {
+				
 				this.gamefield[i][j] = new Field();
 				this.gamefield[i][j].x = j;
 				this.gamefield[i][j].y = i;
-				this.gamefield[i][j].value = this.temp[i][j];
+				this.gamefield[i][j].value = 0;
 			}
 		}
+		
+		
 		
 	}
 	
@@ -99,11 +102,43 @@ public class Game {
 		return ret;
 	}
 	
+	public int[][] createRandomField(){
+		int[][] ret = new int[9][9];
+		
+		for( int i = 0; i < 9; i++) {
+			for( int j = 0; j < 9; j++) {
+				int place = (int) ((Math.random()*9) + 1);
+				boolean valid = true;
+				System.out.println(place);
+				while(valid) {
+					place = (int) ((Math.random()*9) + 1);
+					if(isValid(i, j, place)) {
+						ret[i][j] = place;
+						//this.gamefield[i][j].value = place;
+						System.out.println(i + "   " + j +"   " + place);
+						valid = false;
+					}
+				}
+			}
+		}
+		
+		return ret;
+	}
+	
 	public void visualizeInTerminal() {
 		for( int i = 0; i < 9; i++) {
 			System.out.println();
 			for( int j = 0; j < 9; j++) {
 				System.out.print(this.gamefield[i][j].value + " | ");
+			}
+		}
+	}
+	
+	public void visualizeInTerminal(int[][] printt) {
+		for( int i = 0; i < 9; i++) {
+			System.out.println();
+			for( int j = 0; j < 9; j++) {
+				System.out.print(printt[i][j] + " | ");
 			}
 		}
 	}
