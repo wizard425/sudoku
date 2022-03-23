@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Game {
 	
-	
 	Field[][] gamefield = new Field[9][9];
 	
 	int[][] temp= new int[][] {
@@ -25,11 +24,10 @@ public class Game {
 		
 		for( int i = 0; i < 9; i++) {
 			for( int j = 0; j < 9; j++) {
-				
 				this.gamefield[i][j] = new Field();
 				this.gamefield[i][j].x = j;
 				this.gamefield[i][j].y = i;
-				this.gamefield[i][j].value = 0;
+				this.gamefield[i][j].value = temp[i][j];
 			}
 		}
 		
@@ -37,13 +35,15 @@ public class Game {
 		
 	}
 	
-	public int[][] makeMove(int y , int x, int placed) {
-		int[][] ret = new int[9][9];
+	public boolean makeMove(int y , int x, int placed) {
+		boolean ret = false;
+		//int[][] ret = new int[9][9];
 		
 		if(isValid(y, x, placed)) {
 			this.gamefield[y][x].value = placed;
+			ret = true;
 		}
-		return this.getFieldInInts();
+		return ret;
 	}
 	
 	
@@ -109,15 +109,17 @@ public class Game {
 			for( int j = 0; j < 9; j++) {
 				int place = (int) ((Math.random()*9) + 1);
 				boolean valid = true;
-				System.out.println(place);
+				//System.out.println(place);
 				while(valid) {
 					place = (int) ((Math.random()*9) + 1);
-					if(isValid(i, j, place)) {
-						ret[i][j] = place;
-						//this.gamefield[i][j].value = place;
-						System.out.println(i + "   " + j +"   " + place);
+
+					//System.out.println(i + "   " + j +"   " + place + "isValid:   "+ isValid(i, j, place));
+					if(this.makeMove(i, j, place)) {
+						
+						System.out.println("in isvalid");
 						valid = false;
-					}
+					}else {
+						place = (int) ((Math.random()*9) + 1);					}
 				}
 			}
 		}
