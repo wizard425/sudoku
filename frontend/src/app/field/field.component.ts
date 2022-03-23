@@ -1,3 +1,4 @@
+import { GameService } from './../service/game.service';
 import { SelectNumberComponent } from './../select-number/select-number.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,9 +24,11 @@ export class FieldComponent implements OnInit {
   ];
 
   //Test Comment
-  constructor(private dialog: MatDialog ) { }
+  constructor(private dialog: MatDialog, private gs: GameService) { }
 
   ngOnInit(): void {
+    //TODO: Initial game
+    this.gs.createGame().subscribe();
   }
 
   openDialog(xNumber: number, yNumber: number){
