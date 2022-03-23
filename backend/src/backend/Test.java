@@ -7,9 +7,13 @@ public class Test {
 	public static void main(String[] args) {
 		Game t = new Game();
 
-		int[][] te = t.createRandomField();
-		t.visualizeInTerminal(te);
+		/*int[][] te = t.createRandomField();
+		 * 
+		 */
 		
+		SudokuFunctions.visualizeInTerminal(SudokuFunctions.getRandomField());
+		
+		t.visualizeInTerminal();
 	}
 
 }
