@@ -1,6 +1,7 @@
 package backend;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SudokuFunctions {
 
@@ -13,15 +14,13 @@ public class SudokuFunctions {
 				// System.out.println(place);
 				while (valid) {
 					place = (int) ((Math.random() * 9) + 1);
-					//System.out.println(place);
+					// System.out.println(place);
 
 					// System.out.println(i + " " + j +" " + place + "isValid: "+ isValid(i, j,
 					// place));
 					if (SudokuFunctions.isValid(ret, i, j, place)) {
 						ret[i][j] = place;
 						valid = false;
-						System.out.println("in isvalid" + i + " +++++ " + j + " +++++ " + place);
-						SudokuFunctions.visualizeInTerminal(ret);
 						if (j == 8)
 							valid = false;
 					} else {
@@ -62,7 +61,7 @@ public class SudokuFunctions {
 		boolean ret = true;
 		if (feld[y][x] != 0)
 			return false;
-		// ArrayList<Field> cluster = SudokuFunctions.getCluster(feld, y, x);
+		ArrayList<Integer> cluster = SudokuFunctions.getCluster(feld, y, x);
 
 		for (int i = 0; i < 9; i++) {
 			// check row compatibily
@@ -75,10 +74,13 @@ public class SudokuFunctions {
 				return false;
 			}
 		}
-		/*
-		 * for (int i = 0; i < cluster.size(); i++) { if (placed ==
-		 * cluster.get(i).value) { return false; } }
-		 */
+
+		for (int i = 0; i < cluster.size(); i++) {
+			if (placed == cluster.get(i)) {
+				return false;
+			}
+		}
+
 		return ret;
 	}
 
@@ -90,7 +92,6 @@ public class SudokuFunctions {
 
 		for (int i = 3 * clusterRow; i < 3 * clusterRow + 3; i++) {
 			for (int j = 3 * clusterColumn; j < 3 * clusterRow + 3; j++) {
-				System.out.println(feld[i][j].value);
 				ret.add(feld[i][j]);
 			}
 		}
@@ -98,18 +99,23 @@ public class SudokuFunctions {
 		return ret;
 	}
 
-	/*
-	 * public static ArrayList<Field> getCluster(Field[][] feld, int y, int x) {
-	 * ArrayList<Field> ret = new ArrayList<Field>();
-	 * 
-	 * int clusterRow = y / 3; int clusterColumn = x / 3;
-	 * 
-	 * for (int i = 3 * clusterRow; i < 3 * clusterRow + 3; i++) { for (int j = 3 *
-	 * clusterColumn; j < 3 * clusterRow + 3; j++) {
-	 * System.out.println(feld[i][j].value); ret.add(feld[i][j]); } }
-	 * 
-	 * return ret; }
-	 */
+	public static ArrayList<Integer> getCluster(int[][] feld, int y, int x) {
+		ArrayList<Integer> ret = new ArrayList<Integer>();
+
+		int clusterRow = y / 3;
+		int clusterColumn = x / 3;
+
+		
+		
+		for (int i = 3 * clusterRow; i < 3 * clusterRow + 3; i++) {
+			for (int j = 3 * clusterColumn; j < 3 * clusterColumn + 3; j++) {
+				ret.add(feld[i][j]);
+			}
+		}
+
+		
+		return ret;
+	}
 
 	public static int[][] getGameInInt(Field[][] feld) {
 		int[][] ret = new int[9][9];
