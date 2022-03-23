@@ -2,6 +2,7 @@ package backend;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -16,16 +17,33 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 
 @Path("")
 public class Endpoints {
-	Game actualGame = Game.getInstance();
+	GameHandler handler = GameHandler.getInstance();
 
 	ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
 	@GET
-	@Path("/feld")
+	@Path("/create")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response Game() throws JsonProcessingException {
-		SudokuFunctions.visualizeInTerminal(this.actualGame.getFieldInInts());
-		String ret = Arrays.deepToString(this.actualGame.getFieldInInts());
+	public Response createGame() throws JsonProcessingException {
+		UUID uid = UUID.randomUUID();
+		String ret = Arrays.deepToString(this.handler.createNewGame(uid.toString()).getFieldInInts());
+
+		String json = ow.writeValueAsString(ret);
+
+		return Response.status(200).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+				.header("gameId", uid).entity(json).build();
+
+	}
+	
+	@GET
+	@Path("/{gameId}/field")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response Game(@PathParam("gameId") UUID gameId) throws JsonProcessingException {
+		
+		String ret = Arrays.deepToString(this.handler.getGame(gameId.toString()).getFieldInInts());
 
 		String json = ow.writeValueAsString(ret);
 
@@ -37,14 +55,16 @@ public class Endpoints {
 	}
 
 	@GET
-	@Path("/setnumber/{y}/{x}/{placed}")
+	@Path("/{gameId}/setnumber/{y}/{x}/{placed}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response resucedmoves(@PathParam("y") int y, @PathParam("x") int x, @PathParam("placed") int placed)
+	public Response resucedmoves(@PathParam("gameId") UUID gameId, @PathParam("y") int y, @PathParam("x") int x, @PathParam("placed") int placed)
 			throws JsonProcessingException {
 
-		if (this.actualGame.makeMove(y, x, placed)) {
-			SudokuFunctions.visualizeInTerminal(this.actualGame.getFieldInInts());
-			String json = ow.writeValueAsString(this.actualGame.getFieldInInts());
+		Game gameOfUser = this.handler.getGame(gameId.toString());
+		
+		if (gameOfUser.makeMove(y, x, placed)) {
+			SudokuFunctions.visualizeInTerminal(gameOfUser.getFieldInInts());
+			String json = ow.writeValueAsString(gameOfUser.getFieldInInts());
 			return Response.status(200).header("Access-Control-Allow-Origin", "*")
 					.header("Access-Control-Allow-Credentials", "true")
 					.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
@@ -61,15 +81,32 @@ public class Endpoints {
 	}
 
 	@GET
-	@Path("/reset")
+	@Path("/{gameId}/reset")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response reset() throws JsonProcessingException {
-		this.actualGame.resetGame();
-		String json = ow.writeValueAsString(this.actualGame.getFieldInInts());
+	public Response reset(@PathParam("gameId") UUID gameId) throws JsonProcessingException {
+		Game gameOfUser = this.handler.getGame(gameId.toString());
+
+		gameOfUser.resetGame();
+		String json = ow.writeValueAsString(gameOfUser.getFieldInInts());
 		return Response.status(200).header("Access-Control-Allow-Origin", "*")
 				.header("Access-Control-Allow-Credentials", "true")
 				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
 				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").entity(json).build();
+
+	}
+
+	@GET
+	@Path("/{gameId}/solve")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response solve(@PathParam("gameId") UUID gameId) throws JsonProcessingException {
+		Game gameOfUser = this.handler.getGame(gameId.toString());
+
+		String json = ow.writeValueAsString(gameOfUser.solve());
+		return Response.status(200).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+				.header("gameId", gameId.toString()).entity(json).build();
 
 	}
 
