@@ -1,4 +1,6 @@
+import { SelectNumberComponent } from './../select-number/select-number.component';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'su-field',
@@ -21,9 +23,18 @@ export class FieldComponent implements OnInit {
   ];
 
   //Test Comment
-  constructor() { }
+  constructor(private dialog: MatDialog ) { }
 
   ngOnInit(): void {
+  }
+
+  openDialog(xNumber: number, yNumber: number){
+    let dialogRef = this.dialog.open(SelectNumberComponent, {
+      data: {
+        x: xNumber,
+        y: yNumber,
+      }
+    });
   }
 
 }
