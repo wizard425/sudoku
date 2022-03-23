@@ -5,10 +5,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FieldComponent } from './field/field.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FieldComponent
   ],
   imports: [
     BrowserModule,

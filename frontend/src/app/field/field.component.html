@@ -1,0 +1,12 @@
+<div>
+  <table class="board">
+    <tr *ngFor="let row of temp; index as rowIndex">
+      <td *ngFor="let sqaure of row; index as squareIndex">
+        <div>
+          {{temp[rowIndex][squareIndex]}}
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
