@@ -10,7 +10,8 @@ public class Test {
 		/*int[][] te = t.createRandomField();
 		 * 
 		 */
-		System.out.println(t.makeMove(0, 0, 2));
+		
+		SudokuFunctions.visualizeInTerminal(SudokuFunctions.getRandomField());
 		
 		t.visualizeInTerminal();
 	}

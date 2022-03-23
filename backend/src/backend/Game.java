@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Game {
 	
+	private static Game game;
+	
 	Field[][] gamefield = new Field[9][9];
 	
 	int[][] temp= new int[][] {
@@ -30,9 +32,13 @@ public class Game {
 				this.gamefield[i][j].value = temp[i][j];
 			}
 		}
-		
-		
-		
+	}
+	
+	public static Game getInstance() {
+	        if(game == null) {
+	            game = new Game();
+	        }
+	        return game;
 	}
 	
 	public boolean makeMove(int y , int x, int placed) {
@@ -46,6 +52,19 @@ public class Game {
 		return ret;
 	}
 	
+	public boolean resetGame() {
+		boolean ret = false;
+		for( int i = 0; i < 9; i++) {
+			for( int j = 0; j < 9; j++) {
+				this.gamefield[i][j] = new Field();
+				this.gamefield[i][j].x = j;
+				this.gamefield[i][j].y = i;
+				this.gamefield[i][j].value = temp[i][j];
+				ret = true;
+			}
+		}
+		return ret;
+	}
 	
 	public boolean isValid(int y, int x , int placed){
 		boolean ret = true;
@@ -83,7 +102,7 @@ public class Game {
 		
 		for( int i = 3*clusterRow; i < 3*clusterRow + 3 ; i++) {
 			for( int j = 3*clusterColumn;j < 3*clusterRow + 3 ; j++) {
-				System.out.println(this.gamefield[i][j].value);
+				//System.out.println(this.gamefield[i][j].value);
 				ret.add(this.gamefield[i][j]);
 			}
 		}
@@ -116,7 +135,7 @@ public class Game {
 					//System.out.println(i + "   " + j +"   " + place + "isValid:   "+ isValid(i, j, place));
 					if(this.makeMove(i, j, place)) {
 						
-						System.out.println("in isvalid");
+						//System.out.println("in isvalid");
 						valid = false;
 					}else {
 						place = (int) ((Math.random()*9) + 1);					}
@@ -135,14 +154,6 @@ public class Game {
 			}
 		}
 	}
-	
-	public void visualizeInTerminal(int[][] printt) {
-		for( int i = 0; i < 9; i++) {
-			System.out.println();
-			for( int j = 0; j < 9; j++) {
-				System.out.print(printt[i][j] + " | ");
-			}
-		}
-	}
+
 	
 }
