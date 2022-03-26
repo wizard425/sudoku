@@ -24,7 +24,8 @@ public class Game {
 		{ 0, 0, 3, 2, 0, 0, 0, 8, 0 },
 		{ 0, 6, 0, 5, 0, 0, 0, 0, 9 },
 		{ 0, 0, 4, 0, 0, 0, 0, 3, 0 },
-		{ 0, 0, 0, 0, 0, 9, 7, 0, 0 } };
+		{ 0, 0, 0, 0, 0, 9, 7, 0, 0 }
+		};
 
 	Game() {
 
@@ -78,12 +79,12 @@ public class Game {
 		ArrayList<Field> cluster = this.getCluster(y, x);
 
 		for (int i = 0; i < 9; i++) {
-			// check row compatibily
+			// check row compatibly
 			if (this.gamefield[y][i].value == placed) {
 				return false;
 			}
 
-			// check column compatibily
+			// check column compatibly
 			if (this.gamefield[i][x].value == placed) {
 				return false;
 			}
