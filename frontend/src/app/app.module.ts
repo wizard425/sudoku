@@ -10,8 +10,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { SelectNumberComponent } from './select-number/select-number.component';
 import {MatSelectModule} from '@angular/material/select';
 import { FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
-
+import {HttpClientModule} from '@angular/common/http';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -28,7 +28,8 @@ import {HttpClientModule} from '@angular/common/http'
     MatDialogModule,
     MatSelectModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

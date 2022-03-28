@@ -1,12 +1,17 @@
-.board{
+h1{
+  font-family: "Comic sans MS";
+  text-align: center;
+  font-size: 300%;
+}
 
+.board{
   margin: auto;
-  margin-top: 10%;
+  margin-top: 2%;
 
   width: 630px;
   height: 630px;
 
-  border: 2px solid #000;
+  border: 3px solid #000;
   border-collapse: collapse;
 }
 
@@ -15,4 +20,37 @@ td {
   text-align: center;
   vertical-align: middle;
   padding: 0;
+
+  font-size: x-large;
+  font-weight: 400;
+}
+
+table td:nth-child(4) {
+  border-left: 3px solid #000;
+}
+
+table td:nth-child(7) {
+  border-left: 3px solid #000;
+}
+
+table tr:nth-child(4) {
+  border-top: 3px solid #000;
+}
+
+table tr:nth-child(7) {
+  border-top: 3px solid #000;
+}
+
+td:hover{
+  background-color: #DCDCDC;
+}
+
+.buttons{
+  margin-top: 2%;
+  text-align: center;
+}
+
+.buttons2{
+  margin-top: 1%;
+  text-align: center;
 }
