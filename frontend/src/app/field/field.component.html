@@ -1,9 +1,32 @@
+<h1>Sudoku</h1>
 <div>
   <table class="board">
     <tr *ngFor="let row of temp; index as rowIndex">
-      <td *ngFor="let sqaure of row; index as squareIndex" (click)="openDialog(rowIndex, squareIndex)">
-        {{ temp[rowIndex][squareIndex] }}
+      <td
+        *ngFor="let sqaure of row; index as squareIndex"
+        (click)="openDialog(squareIndex, rowIndex)"
+      >
+        <div *ngIf="temp[rowIndex][squareIndex] == 0; else notNull">
+          {{ "" }}
+        </div>
+        <ng-template #notNull>
+          {{ temp[rowIndex][squareIndex] }}
+        </ng-template>
       </td>
     </tr>
   </table>
+</div>
+
+<div class="buttons" fxLayoutGap="10px">
+  <button mat-raised-button color="primary" (click)="solveField()">
+    Solve
+  </button>
+  <button mat-raised-button color="accent" (click)="newGame()">
+    New Game
+  </button>
+</div>
+<div class="buttons2" fxLayoutGap="10px">
+  <button mat-raised-button>Easy</button>
+  <button mat-raised-button>Medium</button>
+  <button mat-raised-button>Hard</button>
 </div>

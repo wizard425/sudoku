@@ -1,1 +1,40 @@
-<p>{{data.x}}   {{data.y}}</p>
+<div fxLayout="row">
+
+  <div (click)="addNumber(7)">
+    <mat-option>7</mat-option>
+  </div>
+  <div (click)="addNumber(8)">
+    <mat-option>8</mat-option>
+  </div>
+  <div (click)="addNumber(9)">
+    <mat-option>9</mat-option>
+  </div>
+</div>
+
+<div fxLayout="row">
+  <div (click)="addNumber(4)">
+    <mat-option>4</mat-option>
+  </div>
+  <div (click)="addNumber(5)">
+    <mat-option>5</mat-option>
+  </div>
+  <div (click)="addNumber(6)">
+    <mat-option>6</mat-option>
+  </div>
+</div>
+
+<div fxLayout="row">
+  <div (click)="addNumber(1)">
+    <mat-option>1</mat-option>
+  </div>
+  <div (click)="addNumber(2)">
+    <mat-option>2</mat-option>
+  </div>
+  <div (click)="addNumber(3)">
+    <mat-option>3</mat-option>
+  </div>
+</div>
+
+<div *ngIf="error">
+  <p>Falsche Zahl!</p>
+</div>

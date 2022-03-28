@@ -8,6 +8,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FieldComponent } from './field/field.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { SelectNumberComponent } from './select-number/select-number.component';
+import {MatSelectModule} from '@angular/material/select';
+import { FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -21,7 +25,11 @@ import { SelectNumberComponent } from './select-number/select-number.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule,
+    FormsModule,
+    HttpClientModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
