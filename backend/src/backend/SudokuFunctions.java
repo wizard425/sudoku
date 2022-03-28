@@ -17,13 +17,9 @@ public class SudokuFunctions {
 			for (int j = 0; j < 9; j++) {
 				int place = (int) ((Math.random() * 9) + 1);
 				boolean valid = true;
-				// System.out.println(place);
 				while (valid) {
 					place = (int) ((Math.random() * 9) + 1);
-					// System.out.println(place);
 
-					// System.out.println(i + " " + j +" " + place + "isValid: "+ isValid(i, j,
-					// place));
 					if (SudokuFunctions.isValid(ret, i, j, place)) {
 						ret[i][j] = place;
 						valid = false;
@@ -132,14 +128,12 @@ public class SudokuFunctions {
 	}
 
 	public static void visualizeInTerminal(int[][] printt) {
-		System.out.println("\n#################################");
 		for (int i = 0; i < 9; i++) {
 			System.out.println();
 			for (int j = 0; j < 9; j++) {
 				System.out.print(printt[i][j] + " | ");
 			}
 		}
-		System.out.println("\n#################################");
 	}
 
 	public static int[][] createFullValidField(int mode) {
@@ -188,7 +182,6 @@ public class SudokuFunctions {
 		
 		for( int i = 0; i < toRemove.size(); i++) {
 			int[] rem = toRemove.get(i);
-			System.out.println(i);
 			solvedField[rem[0] - 1][rem[1] - 1] = 0;
 		}
 		return solvedField;
@@ -202,7 +195,6 @@ public class SudokuFunctions {
 				int x = (int) (Math.random() * +9 + 1);
 				int y = (int) (Math.random() * +9 + 1);
 				int[] check = new int[] { y, x };
-				System.out.println(Arrays.toString(check));
 				if (!ret.contains(check)) {
 					valid = false;
 					ret.add(check);
@@ -213,8 +205,7 @@ public class SudokuFunctions {
 		return ret;
 	}
 
-	public int[][] solve(int[][] fieldToSolve) {
-		int[][] ret = new int[9][9];
+	public static int[][] solve(int[][] fieldToSolve) {
 		solveBoard(fieldToSolve);
 		return solvedField;
 	}

@@ -20,14 +20,13 @@ public class GameHandler {
 	
 	public Game getGame(String key) {
 		return this.games.get(key);
-		
 	}
 	
 	public Game createNewGame(String key, int difficulty) {
 		Game newGame = new Game();
 		int[][] temp = SudokuFunctions.createFullValidField(difficulty);
 		
-		
+		newGame.gamefield = temp;
 		
 		games.put(key, newGame);
 		
