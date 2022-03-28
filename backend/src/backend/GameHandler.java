@@ -23,8 +23,11 @@ public class GameHandler {
 		
 	}
 	
-	public Game createNewGame(String key) {
+	public Game createNewGame(String key, int difficulty) {
 		Game newGame = new Game();
+		int[][] temp = SudokuFunctions.createFullValidField(difficulty);
+		
+		
 		
 		games.put(key, newGame);
 		

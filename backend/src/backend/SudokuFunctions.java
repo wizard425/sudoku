@@ -1,6 +1,5 @@
 package backend;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -8,9 +7,9 @@ public class SudokuFunctions {
 
 	public static int[][] solvedField = new int[9][9];
 
-	public static int fieldsToRemoveEasy = 30;
-	public static int fieldsToRemoveMiddle = 40;
-	public static int fieldsToRemoveHard = 50;
+	public static int fieldsToRemoveEasy = 50;
+	public static int fieldsToRemoveMiddle = 60;
+	public static int fieldsToRemoveHard = 70;
 
 	public static int[][] getRandomField() {
 		int[][] ret = new int[9][9];

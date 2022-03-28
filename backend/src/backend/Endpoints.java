@@ -25,7 +25,24 @@ public class Endpoints {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createGame() throws JsonProcessingException {
 		UUID uid = UUID.randomUUID();
-		String ret = Arrays.deepToString(this.handler.createNewGame(uid.toString()).getFieldInInts());
+		int[][] ret = this.handler.createNewGame(uid.toString(), 1).getFieldInInts();
+
+		//String json = ow.writeValueAsString(ret);
+
+		return Response.status(200).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+				.header("gameId", uid).entity(ret).build();
+
+	}
+	
+	@GET
+	@Path("/create/{difficulty}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response createGameWithDifficulty(@PathParam("difficulty") int diff) throws JsonProcessingException {
+		UUID uid = UUID.randomUUID();
+		String ret = Arrays.deepToString(this.handler.createNewGame(uid.toString(), 1).getFieldInInts());
 
 		String json = ow.writeValueAsString(ret);
 

@@ -11,7 +11,7 @@ import com.sun.net.httpserver.HttpServer;
 
 public class Server {
 	static int port = 40000;
-	static String a = "http://localhost/";
+	static String a = "http://192.168.1.125/";
 
 	public static void main(String[] args) {
 		URI uri = UriBuilder.fromUri(a).port(port).build();

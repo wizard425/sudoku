@@ -11,7 +11,7 @@ public class Game {
 	private static Game game;
 
 	
-	Field[][] gamefield = new Field[9][9];
+	int[][] gamefield = new int[9][9];
 
 	int[][] solvedField = new int[9][9];
 	
@@ -31,10 +31,7 @@ public class Game {
 
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
-				this.gamefield[i][j] = new Field();
-				this.gamefield[i][j].x = j;
-				this.gamefield[i][j].y = i;
-				this.gamefield[i][j].value = template[i][j];
+				this.gamefield[i][j] = template[i][j];
 			}
 		}
 	}
@@ -51,7 +48,7 @@ public class Game {
 		// int[][] ret = new int[9][9];
 
 		if (isValid(y, x, placed)) {
-			this.gamefield[y][x].value = placed;
+			this.gamefield[y][x] = placed;
 			ret = true;
 		}
 		return ret;
@@ -61,10 +58,7 @@ public class Game {
 		boolean ret = false;
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
-				this.gamefield[i][j] = new Field();
-				this.gamefield[i][j].x = j;
-				this.gamefield[i][j].y = i;
-				this.gamefield[i][j].value = template[i][j];
+				this.gamefield[i][j] = template[i][j];
 				ret = true;
 			}
 		}
@@ -73,25 +67,25 @@ public class Game {
 
 	public boolean isValid(int y, int x, int placed) {
 		boolean ret = true;
-		if (this.gamefield[y][x].value != 0)
+		if (this.gamefield[y][x] != 0)
 			return false;
 
-		ArrayList<Field> cluster = this.getCluster(y, x);
+		ArrayList<int[]> cluster = this.getCluster(y, x);
 
 		for (int i = 0; i < 9; i++) {
 			// check row compatibly
-			if (this.gamefield[y][i].value == placed) {
+			if (this.gamefield[y][i] == placed) {
 				return false;
 			}
 
 			// check column compatibly
-			if (this.gamefield[i][x].value == placed) {
+			if (this.gamefield[i][x] == placed) {
 				return false;
 			}
 		}
 
 		for (int i = 0; i < cluster.size(); i++) {
-			if (placed == cluster.get(i).value) {
+			if (placed == cluster.get(i)[2]) {
 				return false;
 			}
 		}
@@ -99,15 +93,15 @@ public class Game {
 		return ret;
 	}
 
-	public ArrayList<Field> getCluster(int y, int x) {
-		ArrayList<Field> ret = new ArrayList<Field>();
+	public ArrayList<int[]> getCluster(int y, int x) {
+		ArrayList<int[]> ret = new ArrayList<int[]>();
 
 		int clusterRow = y / 3;
 		int clusterColumn = x / 3;
 
 		for (int i = 3 * clusterRow; i < 3 * clusterRow + 3; i++) {
 			for (int j = 3 * clusterColumn; j < 3 * clusterRow + 3; j++) {
-				ret.add(this.gamefield[i][j]);
+				ret.add(new int[] {i, j});
 			}
 		}
 
@@ -119,7 +113,7 @@ public class Game {
 
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
-				ret[i][j] = this.gamefield[i][j].value;
+				ret[i][j] = this.gamefield[i][j];
 			}
 		}
 		return ret;
@@ -187,7 +181,7 @@ public class Game {
 		for (int i = 0; i < 9; i++) {
 			System.out.println();
 			for (int j = 0; j < 9; j++) {
-				System.out.print(this.gamefield[i][j].value + " | ");
+				System.out.print(this.gamefield[i][j] + " | ");
 			}
 		}
 	}
