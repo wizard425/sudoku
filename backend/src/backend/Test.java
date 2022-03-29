@@ -6,7 +6,6 @@ public class Test {
 		Game t = new Game();
 
 		int[][] te = SudokuFunctions.createFullValidField(3);
-		SudokuFunctions.visualizeInTerminal(te);
 	}
 
 }
