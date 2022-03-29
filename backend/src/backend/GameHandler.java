@@ -2,6 +2,7 @@ package backend;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class GameHandler {
 
@@ -22,15 +23,20 @@ public class GameHandler {
 		return this.games.get(key);
 	}
 	
-	public Game createNewGame(String key, int difficulty) {
+	public Game createNewGame(UUID key, int difficulty) {
 		Game newGame = new Game();
 		int[][] temp = SudokuFunctions.createFullValidField(difficulty);
 		
 		newGame.gamefield = temp;
 		
-		games.put(key, newGame);
+		games.put(key.toString(), newGame);
 		
 		return newGame;
+	}
+	
+	public Game saveGame(UUID key, Game gameToSave) {
+		games.put(key.toString(), gameToSave);
+		return gameToSave;
 	}
 	
 	public ArrayList<Game> getAllGames() {
@@ -38,6 +44,13 @@ public class GameHandler {
 		for (String key: games.keySet()) {
 			ret.add(this.games.get(key));
 		}
+		return ret;
+	}
+	
+	public ArrayList<String> getAllGameKeys(){
+		ArrayList<String> ret = new ArrayList<String>();
+		for( String key: games.keySet())
+			ret.add(key);
 		return ret;
 	}
 }

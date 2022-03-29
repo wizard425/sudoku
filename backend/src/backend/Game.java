@@ -149,6 +149,17 @@ public class Game {
 		return ret;
 	}
 	
+	public boolean isFinished() {
+		int counter = 0;
+		for( int i = 0; i < 9; i++) {
+			for( int j = 0; j < 9; j++) {
+				if(gamefield[i][j] != 0)
+					counter++;
+			}
+		}
+		return counter == 0;
+	}
+	
 	public int[][] solve(){
 		solveBoard(this.template);
 		return this.solvedField;

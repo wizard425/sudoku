@@ -178,8 +178,6 @@ public class SudokuFunctions {
 		ArrayList<int[]> toRemove = SudokuFunctions.getFieldsToRemove(mode);
 
 		SudokuFunctions.solveBoard(ret);
-		SudokuFunctions.visualizeInTerminal(ret);
-		
 		for( int i = 0; i < toRemove.size(); i++) {
 			int[] rem = toRemove.get(i);
 			solvedField[rem[0] - 1][rem[1] - 1] = 0;
