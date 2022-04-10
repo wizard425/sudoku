@@ -2,7 +2,9 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const URL = 'http://kobcloud.com:40000';
+const URL = 'http://10.216.220.104:40000';
+//const URL = 'http://kobcloud.com:40000';
+
 
 @Injectable({
   providedIn: 'root'
